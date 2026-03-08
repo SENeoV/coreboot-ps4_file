@@ -12,12 +12,12 @@ CROSS_COMPILE="x86_64-linux-gnu-"
 echo "Building Coreboot for PS4 Fat (CUH-1004A)"
 
 # Create directory structure
-mkdir -p $COREBOT_DIR/src/mainboard/sony/ps4-fat
-mkdir -p $COREBOT_DIR/src/southbridge/sony/aeolia
-mkdir -p $COREBOT_DIR/src/northbridge/amd/ps4_belize
-mkdir -p $COREBOT_DIR/src/cpu/amd/jaguar
-mkdir -p $COREBOT_DIR/payloads/ps4_linux
-mkdir -p $COREBOT_DIR/configs
+mkdir -p $COREBOOT_DIR/src/mainboard/sony/ps4-fat
+mkdir -p $COREBOOT_DIR/src/southbridge/sony/aeolia
+mkdir -p $COREBOOT_DIR/src/northbridge/amd/ps4_belize
+mkdir -p $COREBOOT_DIR/src/cpu/amd/jaguar
+mkdir -p $COREBOOT_DIR/payloads/ps4_linux
+mkdir -p $COREBOOT_DIR/configs
 
 # Copy source files
 # (Assume files are in current directory)
