@@ -1,0 +1,93 @@
+##
+## Kconfig for Sony PS4 Fat (CUH-1004A)
+##
+
+if BOARD_SONY_PS4_FAT
+
+config BOARD_SPECIFIC_OPTIONS
+    def_bool y
+    select ARCH_X86
+    select CPU_AMD_JAGUAR
+    select NORTHBRIDGE_AMD_PS4_BELIZE
+    select SOUTHBRIDGE_SONY_AEOLIA
+    select SUPERIO_SONY_AEOLIA
+    select HAVE_ACPI_TABLES
+    select HAVE_OPTION_TABLE
+    select HAVE_CMOS_DEFAULT
+    select HAVE_PAYLOAD_PREPARSE
+    select HAVE_PAYLOAD_BOOTBLOB
+    select PS4_SUPPORT
+
+config MAINBOARD_DIR
+    string
+    default "sony/ps4-fat"
+
+config MAINBOARD_PART_NUMBER
+    string
+    default "PS4-FAT-CUH-1004A"
+
+config MAINBOARD_VENDOR
+    string
+    default "Sony"
+
+config MAINBOARD_FAMILY
+    string
+    default "PlayStation 4"
+
+config MAX_CPUS
+    int
+    default 8
+
+config IRQ_SLOT_COUNT
+    int
+    default 18
+
+config DRAM_SIZE_MB
+    int
+    default 8192
+
+config DRAM_BASE
+    hex
+    default 0x80000000
+
+config AEOLIA_UART_BASE
+    hex
+    default 0xd0340000
+    help
+        UART base address for Aeolia southbridge debug console
+
+config AEOLIA_XHCI_BASE
+    hex
+    default 0xe8000000
+    help
+        USB 3.0 XHCI controller base address
+
+config AEOLIA_AHCI_BASE
+    hex
+    default 0xe9000000
+    help
+        SATA AHCI controller base address
+
+config AEOLIA_PCIE_BASE
+    hex
+    default 0xe0000000
+    help
+        PCIe configuration space base for Aeolia
+
+config CBFS_SIZE
+    hex
+    default 0x200000
+
+config HEAP_SIZE
+    hex
+    default 0x400000
+
+config STACK_SIZE
+    hex
+    default 0x10000
+
+config PAYLOAD_FILE
+    string "PS4 Linux payload path"
+    default "payloads/ps4_linux/ps4-linux.elf"
+
+endif # BOARD_SONY_PS4_FAT
