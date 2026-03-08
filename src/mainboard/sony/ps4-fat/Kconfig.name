@@ -1,0 +1,6 @@
+config BOARD_SONY_PS4_FAT
+    bool "PS4 Fat (CUH-1004A)"
+    select BOARD_ROMSIZE_KB_2048
+    help
+        Sony PlayStation 4 Fat model with Aeolia southbridge
+        and Belize (Liverpool) GPU. Supports firmware 12.xx.
