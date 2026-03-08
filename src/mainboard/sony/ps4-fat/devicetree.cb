@@ -1,0 +1,80 @@
+## Device tree for Sony PS4 Fat
+
+chip northbridge/amd/ps4_belize
+    device cpu_cluster 0 on
+        chip cpu/amd/jaguar
+            device lapic 0 on end
+        end
+    end
+
+    device domain 0 on
+        # PCIe root complex
+        device pci 0.0 on end # Host bridge
+        
+        # GPU (Belize/Liverpool)
+        device pci 1.0 on 
+            subsystemid 0x1044 0x0123  # Sony vendor ID
+            register "gpu_config" = "{
+                .dc_enable = 1,
+                .dpm_enable = 1,
+                .cik_support = 1,
+            }"
+        end # GPU
+        
+        # HDMI Audio
+        device pci 1.1 on end
+        
+        # Aeolia Southbridge (connected via PCIe)
+        device pci 2.0 on 
+            chip southbridge/sony/aeolia
+                # USB 3.0 Controller
+                device pci 0.0 on 
+                    register "usb_config" = "{
+                        .num_ports = 4,
+                        .xhci_base = 0xe8000000,
+                    }"
+                end # XHCI
+                
+                # SATA Controller
+                device pci 0.1 on 
+                    register "sata_config" = "{
+                        .num_ports = 1,
+                        .ahci_base = 0xe9000000,
+                    }"
+                end # AHCI
+                
+                # UART Debug
+                device pci 0.2 on 
+                    register "uart_config" = "{
+                        .base = 0xd0340000,
+                        .baud = 115200,
+                    }"
+                end # UART
+                
+                # GPIO
+                device pci 0.3 on 
+                    register "gpio_config" = "{
+                        .base = 0xef000000,
+                        .led_power = 1,
+                    }"
+                end # GPIO
+            end
+        end # Aeolia
+        
+        # Internal devices
+        device pci 4.0 on end # Network controller (if present)
+        device pci 5.0 on end # Bluetooth/WiFi
+        
+        # Root complex resources
+        register "pci_mmio_size" = "0x80000000"
+        register "pci_io_size" = "0x10000"
+    end
+    
+    # PS4-specific firmware configuration
+    register "ps4_config" = "{
+        .southbridge = AEOLIA,
+        .firmware_version = 0x1200,  # 12.00 support
+        .exploit_compat = 1,          # Enable jailbreak compatibility
+        .boot_protocol = PS4_LINUX,
+    }"
+end
