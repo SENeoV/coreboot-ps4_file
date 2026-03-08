@@ -1,4 +1,4 @@
-# Clone Coreboot
+# Clone Coreboot WIP for ps4-fat test only i one to boot windows on ps4 ?
 git clone https://codeberg.org/Abdulghani121/coreboot-ps4.git 
 cd coreboot-ps4
 
